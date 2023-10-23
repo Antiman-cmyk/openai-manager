@@ -119,7 +119,7 @@ async def batch_submission(auth_manager: OpenAIAuthManager, input: List[Any], pb
     consumers = []
     thread_id = 0
     # move connector and session here to avoid 'Timeout context manager should be used inside a task'
-    async with aiohttp.TCPConnector(limit=GLOBAL_NUM_REQUEST_LIMIT) as connector:
+    async with aiohttp.TCPConnector(limit=GLOBAL_NUM_REQUEST_LIMIT, ssl=False) as connector:
         async with aiohttp.ClientSession(connector=connector) as session:
             for auth in auth_manager.auths:
                 consumers.extend([asyncio.create_task(consume_submit(
