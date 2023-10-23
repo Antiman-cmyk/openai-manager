@@ -202,7 +202,7 @@ class APIRequest:
     ):
         # `pure version` remove ratelimit checker and capacity updater
         logger.info(f"thread {thread_id} Starting request #{self.task_id}")
-        error = None
+        response, error = None, None
         try:
             post_params = {
                 'url': request_url,
